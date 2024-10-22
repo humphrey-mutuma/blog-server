@@ -5,8 +5,11 @@ import com.example.blog.model.Tag;
 import java.util.Set;
 
 public interface ITagService {
-    public Tag createTag(Tag tag);
-    public void deleteTagById(Long id);
-    public  Set<Tag> getPaginatedTags() ;
-    public Long getTagsCount();
+//    create a tag
+    Tag createTag(Tag tag);
+//   delete a tag
+    void deleteTagById(Long id);
+//   fetch top used tags based on the number of articles tagged on
+    Set<Tag> getPaginatedTags() ;
+//    ....
 }

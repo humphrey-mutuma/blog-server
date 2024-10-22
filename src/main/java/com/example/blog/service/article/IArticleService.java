@@ -20,5 +20,6 @@ public interface IArticleService {
     //    get a users articles
     List<Article> getUserArticles(Long userId);
     //    get users articles count
-    long countUsersArticles(Long userId)
+    long countUsersArticles(Long userId);
+//    ...
 }

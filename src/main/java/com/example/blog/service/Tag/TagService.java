@@ -24,8 +24,4 @@ public class TagService implements ITagService {
         return Set.of();
     }
 
-    @Override
-    public Long getTagsCount() {
-        return null;
-    }
 }
