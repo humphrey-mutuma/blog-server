@@ -68,6 +68,11 @@
 			<artifactId>java-dotenv</artifactId>
 			<version>5.2.2</version>
 		</dependency>
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>3.0.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -83,6 +88,7 @@
 
 	<build>
 		<plugins>
+<!--			-->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -95,6 +101,8 @@
 					</excludes>
 				</configuration>
 			</plugin>
+<!--			-->
+
 		</plugins>
 	</build>
 

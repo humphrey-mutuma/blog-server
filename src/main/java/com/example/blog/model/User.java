@@ -30,6 +30,7 @@ public class User {
     private String email;
 
     @NotBlank(message = "Password is required!")
+    @Column(nullable = false)
     private String password;
 
     @CreationTimestamp
