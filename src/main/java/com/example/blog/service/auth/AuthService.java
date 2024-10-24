@@ -1,18 +1,17 @@
 package com.example.blog.service.auth;
 
-import com.example.blog.dto.auth.LoginDto;
 import com.example.blog.model.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class AuthService implements IAuthService{
-    private final PasswordEncoder passwordEncoder;
+//    private final PasswordEncoder passwordEncoder;
 
     @Override
-    public LoginDto login(String email, String password) {
+    public User login(String email, String password) {
         return null;
     }
 

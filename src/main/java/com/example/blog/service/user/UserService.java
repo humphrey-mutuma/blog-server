@@ -38,7 +38,7 @@ public class UserService implements IUserService {
         if (user.getBookmarks() != null) {
             existingUser.setBookmarks(user.getBookmarks());
         }
-            // Save the updated user entity
+        // Save the updated user entity
         User updatedUser = userRepository.save(existingUser);
 
         // Convert the updated entity to DTO
@@ -70,7 +70,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public List<Long> getUserBookmarks(Long userid) {
+    public List<Long> getUserBookmarks(Long userId) {
         return List.of();
     }
 }
