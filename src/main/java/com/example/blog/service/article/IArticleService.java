@@ -12,14 +12,11 @@ public interface IArticleService {
     // Update an existing article
     Article updateArticle(Article updatedArticle);
     // Delete an article by its ID
-    void deleteArticleById(Long articleId);
+    Long deleteArticleById(Long articleId);
     // Get all articles
     List<Article> getAllArticles();
     //  Get articles by Tags
-    List<Article> getArticlesByTags(String tag);
-    //    get a users articles
-    List<Article> getUserArticles(Long userId);
-    //    get users articles count
-    long countUsersArticles(Long userId);
+    List<Article> getArticlesByTag(String tag);
+
 //    ...
 }

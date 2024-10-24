@@ -2,6 +2,7 @@ package com.example.blog.service.user;
 
 import com.example.blog.dto.user.UserDto;
 import com.example.blog.exceptions.ResourceNotFoundException;
+import com.example.blog.model.Article;
 import com.example.blog.model.User;
 import com.example.blog.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -46,10 +47,10 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public boolean deleteUserById(Long userId) {
+    public Long deleteUserById(Long userId) {
          return userRepository.findById(userId).map(user -> {
              userRepository.deleteById(userId);
-             return true;
+             return userId;
          }).orElseThrow(() -> new ResourceNotFoundException("User not found with ID " + userId));
     }
 
@@ -70,7 +71,17 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public List<Long> getUserBookmarks(Long userId) {
+    public List<Article> getUserBookmarks(Long userId) {
         return List.of();
+    }
+
+    @Override
+    public List<Article> getUserArticles(Long userId) {
+        return List.of();
+    }
+
+    @Override
+    public int getUsersArticlesCount(Long userId) {
+        return 0;
     }
 }

@@ -25,7 +25,7 @@ public class ArticleService implements IArticleService {
     }
 
     @Override
-    public void deleteArticleById(Long articleId) {
+    public Long deleteArticleById(Long articleId) {
 
     }
 
@@ -35,17 +35,8 @@ public class ArticleService implements IArticleService {
     }
 
     @Override
-    public List<Article> getArticlesByTags(String tag) {
+    public List<Article> getArticlesByTag(String tag) {
         return List.of();
     }
 
-    @Override
-    public List<Article> getUserArticles(Long userId) {
-        return List.of();
-    }
-
-    @Override
-    public long countUsersArticles(Long userId) {
-        return 0;
-    }
 }

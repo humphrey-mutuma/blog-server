@@ -1,12 +1,12 @@
 package com.example.blog.controller;
 
+import com.example.blog.dto.user.ArticleCountDto;
 import com.example.blog.dto.user.UserDto;
-import com.example.blog.exceptions.ResourceNotFoundException;
+import com.example.blog.model.Article;
 import com.example.blog.model.User;
 import com.example.blog.response.ApiResponse;
 import com.example.blog.service.user.IUserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,37 +21,27 @@ public class UserController {
 
 
     // Fetch user by email
-    @GetMapping("/{email}")
+    @GetMapping("/email/{email}")
     public ResponseEntity<UserDto> getUserByEmail(@PathVariable String email) {
         Optional<UserDto> userOptional = userService.getUserByEmail(email);
-        if (userOptional.isPresent()){
-              return ResponseEntity.ok(userOptional.get());
-         }else{
-            throw new ResourceNotFoundException("No user found with email: " + email);
-     }
+         return userOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
 
     }
 //    update a user
     @PostMapping("/{userId}")
     public ResponseEntity<UserDto> updateUser(@RequestBody User user, @PathVariable Long userId) {
-        Optional<UserDto> optionalUser = Optional.ofNullable(userService.updateUser(user, userId));
-        if (optionalUser.isPresent()){
-            return ResponseEntity.ok(optionalUser.get());
-
-        }else {
-            throw new ResourceNotFoundException("User not found with ID: " + userId);
-        }
-     }
+        UserDto optionalUser = userService.updateUser(user, userId);
+        return optionalUser != null ? ResponseEntity.ok(optionalUser) : ResponseEntity.badRequest().build();
+    }
 
     @DeleteMapping("/{userId}")
     public ResponseEntity<ApiResponse> deleteUserById(@PathVariable Long userId) {
-        boolean wasDeleted = userService.deleteUserById(userId);
-        if (wasDeleted){
-            return   ResponseEntity.ok(new ApiResponse("User deleted successfully", true));
+        Long deleteUserId = userService.deleteUserById(userId);
+        if (deleteUserId != null){
+          return   ResponseEntity.ok(new ApiResponse("User deleted successfully", deleteUserId));
         }else {
-            return ResponseEntity.ok(new ApiResponse("Delete user failed!",false));
+          return   ResponseEntity.notFound().build();
         }
-
      }
 
     @PutMapping("/bookmarks/{userId}/{articleId}")
@@ -60,13 +50,29 @@ public class UserController {
     }
 
     @GetMapping("/bookmarks/{userId}")
-    public ResponseEntity<ApiResponse> getUserBookmarks(@PathVariable Long userId) {
-        try {
-            List<Long> bookmarks = userService.getUserBookmarks(userId);
-            return ResponseEntity.ok(new ApiResponse("User Bookmarks success!", bookmarks));
-
-        }catch (ResourceNotFoundException e){
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(new ApiResponse("Not bookmarks found", e.getMessage()));
+    public ResponseEntity<List<Article>> getUserBookmarks(@PathVariable Long userId) {
+        List<Article> bookmarks = userService.getUserBookmarks(userId);
+        if (bookmarks != null && !bookmarks.isEmpty()) {
+            return ResponseEntity.ok(bookmarks);
+        } else {
+            return ResponseEntity.notFound().build();
         }
+     }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<List<Article>> getUserArticles(@PathVariable Long userId) {
+        List<Article> userArticles = userService.getUserArticles(userId);
+        if (userArticles != null && !userArticles.isEmpty()) {
+            return ResponseEntity.ok(userArticles); // Return 200 OK with the list of articles
+        } else {
+            return ResponseEntity.notFound().build(); // Return 404 Not Found if no articles found
+        }
+    }
+
+    @GetMapping("/articles/{userId}")
+    public ResponseEntity<ArticleCountDto> getUsersArticlesCount(Long userId) {
+        int userArticlesCount = userService.getUsersArticlesCount(userId);
+        ArticleCountDto countDto = new ArticleCountDto(userArticlesCount);
+        return ResponseEntity.ok(countDto);
     }
 }
