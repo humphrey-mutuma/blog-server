@@ -36,9 +36,9 @@ public class ArticleController {
         }
      }
 
-    @PutMapping
-    public ResponseEntity<Article> updateArticle(@RequestBody Article article) {
-        Article updatedArticle = articleService.updateArticle(article);
+    @PutMapping("/{articleId}")
+    public ResponseEntity<Article> updateArticle(@RequestBody Article article, @PathVariable Long articleId) {
+        Article updatedArticle = articleService.updateArticle(article, articleId);
         if (updatedArticle != null){
             return ResponseEntity.ok(updatedArticle);
         }else {
@@ -58,7 +58,7 @@ public class ArticleController {
 
     @GetMapping("/")
     public ResponseEntity<List<Article>> getAllArticles(@RequestParam int page) {
-        List<Article> articles = articleService.getAllArticles();
+        List<Article> articles = articleService.getAllArticles(page);
         if (articles != null && !articles.isEmpty()){
             return ResponseEntity.ok(articles);
         } else {

@@ -10,11 +10,12 @@ public interface IArticleService {
     // Create a new article
     Article createArticle(Article article);
     // Update an existing article
-    Article updateArticle(Article updatedArticle);
+    Article updateArticle(Article updatedArticle, Long articleId);
     // Delete an article by its ID
     Long deleteArticleById(Long articleId);
     // Get all articles
-    List<Article> getAllArticles();
+    List<Article> getAllArticles(int page);
+
     //  Get articles by Tags
     List<Article> getArticlesByTag(String tag);
 
