@@ -23,7 +23,7 @@ public class Comment {
 
     @NotBlank(message = "Comment is required")
     @Size(min = 2, max = 200, message = "Comment should be 2 chars at least and 200 chars at most")
-    private String comment;
+    private String title;
 
     @CreationTimestamp
     @Column(updatable = false)  // Prevents `createdAt` from being updated

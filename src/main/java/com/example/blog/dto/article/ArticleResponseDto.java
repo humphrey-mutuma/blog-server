@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Data
@@ -14,5 +15,5 @@ public class ArticleResponseDto {
     private String title;
     private String description;
     private Set<Tag> tags;
-
+    private LocalDateTime createdAt;
 }
