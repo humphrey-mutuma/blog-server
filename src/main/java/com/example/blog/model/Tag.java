@@ -29,9 +29,9 @@ public class Tag {
 
     @CreationTimestamp
     private LocalDateTime createdAt;
-
-    @ManyToMany(mappedBy = "tags")
-    private Set<Article>  articles;
-
+//
+//    @ManyToMany(mappedBy = "tags")
+//    private Set<Article>  articles;
+//
 
 }
