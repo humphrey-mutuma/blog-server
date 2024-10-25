@@ -16,7 +16,7 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     @Query("SELECT COUNT(t) FROM Article a JOIN a.tags t WHERE a.id = :articleId")
     int articleTagsCount(@Param("articleId") Long articleId);
 
-//     fetch articles by tag
+////     fetch articles by tag
     @Query("SELECT a FROM Article a JOIN a.tags t WHERE t.name = :tag")
     List<Article> findByTagName(@Param("tag") String tag);
 

@@ -1,5 +1,7 @@
 package com.example.blog.controller;
 
+import com.example.blog.dto.article.ArticleResponseDto;
+import com.example.blog.dto.article.CreateArticleDto;
 import com.example.blog.model.Article;
 import com.example.blog.response.ApiResponse;
 import com.example.blog.service.article.IArticleService;
@@ -17,8 +19,8 @@ public class ArticleController {
     private final IArticleService articleService;
 
     @GetMapping("/{articleId}")
-    public ResponseEntity<Article> getArticleById(@PathVariable Long articleId) {
-         Article article = articleService.getArticleById(articleId);
+    public ResponseEntity<ArticleResponseDto> getArticleById(@PathVariable Long articleId) {
+        ArticleResponseDto article = articleService.getArticleById(articleId);
          if (article != null ){
              return ResponseEntity.ok(article);
          }else {
@@ -27,8 +29,8 @@ public class ArticleController {
      }
 
     @PostMapping
-    public ResponseEntity<Article> createArticle(@RequestBody Article article) {
-        Article newArticle = articleService.createArticle(article);
+    public ResponseEntity<ArticleResponseDto> createArticle(@RequestBody CreateArticleDto article) {
+        ArticleResponseDto newArticle = articleService.createArticle(article);
         if (newArticle != null){
              return    ResponseEntity.status(HttpStatus.CREATED).body(newArticle);
         }else {
@@ -37,8 +39,8 @@ public class ArticleController {
      }
 
     @PutMapping("/{articleId}")
-    public ResponseEntity<Article> updateArticle(@RequestBody Article article, @PathVariable Long articleId) {
-        Article updatedArticle = articleService.updateArticle(article, articleId);
+    public ResponseEntity<ArticleResponseDto> updateArticle(@RequestBody Article article, @PathVariable Long articleId) {
+        ArticleResponseDto updatedArticle = articleService.updateArticle(article, articleId);
         if (updatedArticle != null){
             return ResponseEntity.ok(updatedArticle);
         }else {
@@ -56,9 +58,9 @@ public class ArticleController {
             }
     }
 
-    @GetMapping("/")
-    public ResponseEntity<List<Article>> getAllArticles(@RequestParam int page) {
-        List<Article> articles = articleService.getAllArticles(page);
+    @GetMapping("/feed")
+    public ResponseEntity<List<ArticleResponseDto>> getAllArticles(@RequestParam int page) {
+        List<ArticleResponseDto> articles = articleService.getAllArticles(page);
         if (articles != null && !articles.isEmpty()){
             return ResponseEntity.ok(articles);
         } else {
@@ -67,8 +69,8 @@ public class ArticleController {
     }
 
     @GetMapping("/tags")
-    public ResponseEntity<List<Article>> getArticlesByTag(@RequestParam String tag) {
-        List<Article> articlesByTag = articleService.getArticlesByTag(tag);
+    public ResponseEntity<List<ArticleResponseDto>> getArticlesByTag(@RequestParam String tag) {
+        List<ArticleResponseDto> articlesByTag = articleService.getArticlesByTag(tag);
         if (articlesByTag != null && !articlesByTag.isEmpty()){
             return ResponseEntity.ok(articlesByTag);
         } else {

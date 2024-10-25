@@ -25,7 +25,7 @@ public class Tag {
     @NotBlank(message = "title is required!")
     @Size(min = 1, max = 20 , message = "Tag cannot be more than 20 character or less")
     @Column(nullable = false, updatable = false)
-    private String title;
+    private String name;
 
     @CreationTimestamp
     private LocalDateTime createdAt;

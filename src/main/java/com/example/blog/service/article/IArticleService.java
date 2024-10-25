@@ -1,23 +1,25 @@
 package com.example.blog.service.article;
 
+import com.example.blog.dto.article.ArticleResponseDto;
+import com.example.blog.dto.article.CreateArticleDto;
 import com.example.blog.model.Article;
 
 import java.util.List;
 
 public interface IArticleService {
     // Retrieve an article by its ID
-    Article getArticleById(Long articleId);
+    ArticleResponseDto getArticleById(Long articleId);
     // Create a new article
-    Article createArticle(Article article);
+    ArticleResponseDto createArticle(CreateArticleDto articleDto);
     // Update an existing article
-    Article updateArticle(Article updatedArticle, Long articleId);
+    ArticleResponseDto updateArticle(Article updatedArticle, Long articleId);
     // Delete an article by its ID
     Long deleteArticleById(Long articleId);
     // Get all articles
-    List<Article> getAllArticles(int page);
+    List<ArticleResponseDto> getAllArticles(int page);
 
     //  Get articles by Tags
-    List<Article> getArticlesByTag(String tag);
+    List<ArticleResponseDto> getArticlesByTag(String tag);
 
 //    ...
 }
