@@ -13,7 +13,7 @@ public interface IUserService {
 //    update user details
     UserDto updateUser(User user, Long userId);
 //    delete user
-    Long  deleteUserById(Long userId);
+    void   deleteUserById(Long userId);
 //    bookmark an article
     boolean bookmarkArticle(Long articleId);
 

@@ -11,12 +11,11 @@ import java.util.List;
 @Repository
 public interface ArticleRepository extends JpaRepository<Article, Long> {
 
-
     // Custom query to count the number of tags for a specific article
     @Query("SELECT COUNT(t) FROM Article a JOIN a.tags t WHERE a.id = :articleId")
     int articleTagsCount(@Param("articleId") Long articleId);
 
-////     fetch articles by tag
+    //    fetch articles by tag
     @Query("SELECT a FROM Article a JOIN a.tags t WHERE t.name = :tag")
     List<Article> findByTagName(@Param("tag") String tag);
 

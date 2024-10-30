@@ -1,6 +1,6 @@
 package com.example.blog.controller;
 
-import com.example.blog.dto.user.ArticleCountDto;
+import com.example.blog.dto.user.ArticlesCountDto;
 import com.example.blog.dto.user.UserDto;
 import com.example.blog.model.Article;
 import com.example.blog.model.User;
@@ -36,13 +36,9 @@ public class UserController {
 
     @DeleteMapping("/{userId}")
     public ResponseEntity<ApiResponse> deleteUserById(@PathVariable Long userId) {
-        Long deleteUserId = userService.deleteUserById(userId);
-        if (deleteUserId != null){
-          return   ResponseEntity.ok(new ApiResponse("User deleted successfully", deleteUserId));
-        }else {
-          return   ResponseEntity.notFound().build();
-        }
-     }
+        userService.deleteUserById(userId);
+        return   ResponseEntity.ok(new ApiResponse("User deleted successfully", true));
+    }
 
     @PutMapping("/bookmarks/{userId}/{articleId}")
     public ResponseEntity<ApiResponse> bookmarkArticle(@PathVariable Long userId , @PathVariable Long articleId) {
@@ -70,9 +66,9 @@ public class UserController {
     }
 
     @GetMapping("/articles/{userId}")
-    public ResponseEntity<ArticleCountDto> getUsersArticlesCount(Long userId) {
+    public ResponseEntity<ArticlesCountDto> getUsersArticlesCount(Long userId) {
         int userArticlesCount = userService.getUsersArticlesCount(userId);
-        ArticleCountDto countDto = new ArticleCountDto(userArticlesCount);
+        ArticlesCountDto countDto = new ArticlesCountDto(userArticlesCount);
         return ResponseEntity.ok(countDto);
     }
 }

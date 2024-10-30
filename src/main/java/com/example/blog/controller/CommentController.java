@@ -1,7 +1,6 @@
 package com.example.blog.controller;
-import com.example.blog.dto.comment.CreateCommentDto;
-import com.example.blog.dto.comment.CreateCommentResDto;
-import com.example.blog.model.Article;
+import com.example.blog.dto.comment.CommentDto;
+import com.example.blog.dto.comment.CommentResDto;
 import com.example.blog.response.ApiResponse;
 import com.example.blog.service.comment.CommentService;
 import lombok.RequiredArgsConstructor;
@@ -15,8 +14,8 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping
-    public ResponseEntity<CreateCommentResDto>  createComment(@RequestBody CreateCommentDto commentData){
-        CreateCommentResDto newComment = commentService.createComment(commentData);
+    public ResponseEntity<CommentResDto>  createComment(@RequestBody CommentDto commentData){
+        CommentResDto newComment = commentService.createComment(commentData);
         if (newComment != null){
             return ResponseEntity.ok(newComment);
         }else {
@@ -26,11 +25,7 @@ public class CommentController {
 
     @DeleteMapping("/{commentId}")
     public ResponseEntity<ApiResponse> deleteComment(@PathVariable Long commentId) {
-        Long deletedComment = commentService.deleteCommentById( commentId);
-        if (deletedComment != null){
-            return ResponseEntity.ok(new ApiResponse("Comment deleted successfully", deletedComment));
-        }else {
-            return ResponseEntity.badRequest().build();
-        }
+        commentService.deleteCommentById( commentId);
+        return ResponseEntity.ok(new ApiResponse("Comment deleted successfully", true));
     }
 }

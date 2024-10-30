@@ -5,7 +5,6 @@ import com.example.blog.model.Tag;
 import com.example.blog.repository.TagRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.Set;
 
 @Service
@@ -21,16 +20,17 @@ public class TagService implements ITagService {
     }
 
     @Override
-    public Long deleteTagById(Long id) {
-      return tagRepository.findById(id).map(tag -> {
+    public void deleteTagById(Long id) {
+       tagRepository.findById(id).map(tag -> {
           tagRepository.deleteById(id);
           return id;
       }).orElseThrow(() -> new ResourceNotFoundException("Tag not found"));
-    }
+     }
 
     @Override
     public Set<Tag> getPaginatedTags() {
         return Set.of();
     }
+// other methods here
 
 }

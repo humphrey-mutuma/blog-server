@@ -47,8 +47,8 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public Long deleteUserById(Long userId) {
-         return userRepository.findById(userId).map(user -> {
+    public void deleteUserById(Long userId) {
+        userRepository.findById(userId).map(user -> {
              userRepository.deleteById(userId);
              return userId;
          }).orElseThrow(() -> new ResourceNotFoundException("User not found with ID " + userId));

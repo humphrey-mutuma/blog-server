@@ -1,14 +1,11 @@
 package com.example.blog.dto.article;
-
 import com.example.blog.model.Comment;
 import com.example.blog.model.Tag;
 import com.example.blog.model.User;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 import java.util.Set;
@@ -16,7 +13,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateArticleDto {
+public class ArticleDto {
 
     @NotNull
     private Long id;
@@ -31,10 +28,10 @@ public class CreateArticleDto {
 
     @NotNull
     @NotBlank
-    private Long userId;
+    private User user;
 
-    private List<Long> commentsIds;
-    private Set<Long> tagsIds;
+    private List<Comment> comments;
+    private Set<Tag> tags;
 
 
 }

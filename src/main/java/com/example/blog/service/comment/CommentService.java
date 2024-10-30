@@ -1,7 +1,7 @@
 package com.example.blog.service.comment;
 
-import com.example.blog.dto.comment.CreateCommentDto;
-import com.example.blog.dto.comment.CreateCommentResDto;
+import com.example.blog.dto.comment.CommentDto;
+import com.example.blog.dto.comment.CommentResDto;
 import com.example.blog.exceptions.ResourceNotFoundException;
 import com.example.blog.model.Article;
 import com.example.blog.model.Comment;
@@ -22,7 +22,7 @@ public class CommentService implements ICommentService {
     private final ArticleRepository articleRepository;
 
     @Override
-    public CreateCommentResDto createComment(CreateCommentDto commentData) {
+    public CommentResDto createComment(CommentDto commentData) {
         // Fetch the user who wrote the comment
         User commentWriter = userRepository.findById(commentData.getUserId())
                 .orElseThrow(() -> new ResourceNotFoundException("Writer not found"));
@@ -41,12 +41,12 @@ public class CommentService implements ICommentService {
         Comment newComment = commentRepository.save(comment);
 
         // Map and return the new comment as a CreateCommentDto
-        return modelMapper.map(newComment, CreateCommentResDto.class);
+        return modelMapper.map(newComment, CommentResDto.class);
     }
 
     @Override
-    public Long deleteCommentById(Long commentId) {
-        return commentRepository.findById(commentId).map(comment -> {
+    public void deleteCommentById(Long commentId) {
+          commentRepository.findById(commentId).map(comment -> {
             commentRepository.deleteById(commentId);
             return commentId;
         }).orElseThrow(()-> new ResourceNotFoundException("Comment not found!"));

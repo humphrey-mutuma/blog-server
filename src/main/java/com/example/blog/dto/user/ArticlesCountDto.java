@@ -6,6 +6,6 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ArticleCountDto {
+public class ArticlesCountDto {
     private int count;
 }

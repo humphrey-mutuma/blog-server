@@ -25,12 +25,7 @@ public class TagController {
 
     @DeleteMapping("/{tagId}")
     public ResponseEntity<ApiResponse> deleteTag(@PathVariable Long tagId){
-        Long deletedArticle = tagService.deleteTagById(tagId);
-
-        if (deletedArticle != null){
-            return  ResponseEntity.ok(new ApiResponse("tag deleted succuessfully", deletedArticle));
-        }else {
-            return ResponseEntity.badRequest().build();
-        }
+         tagService.deleteTagById(tagId);
+         return  ResponseEntity.ok(new ApiResponse("Tag deleted successfully!", true));
     }
 }

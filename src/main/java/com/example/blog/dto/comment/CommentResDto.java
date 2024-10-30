@@ -4,7 +4,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class CreateCommentResDto {
+public class CommentResDto {
     private Long id;
     private String title;
     private LocalDateTime createdAt;

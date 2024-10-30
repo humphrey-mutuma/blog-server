@@ -8,7 +8,7 @@ public interface ITagService {
 //    create a tag
     Tag createTag(Tag tag);
 //   delete a tag
-    Long deleteTagById(Long id);
+    void deleteTagById(Long id);
 //   fetch top used tags based on the number of articles tagged on
     Set<Tag> getPaginatedTags() ;
 //    ....

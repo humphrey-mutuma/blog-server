@@ -1,6 +1,8 @@
 package com.example.blog.controller;
 
+import com.example.blog.dto.article.ArticleFeedDto;
 import com.example.blog.dto.article.ArticleResponseDto;
+import com.example.blog.dto.article.ArticleDto;
 import com.example.blog.dto.article.CreateArticleDto;
 import com.example.blog.model.Article;
 import com.example.blog.response.ApiResponse;
@@ -50,17 +52,13 @@ public class ArticleController {
 
     @DeleteMapping("/{articleId}")
     public ResponseEntity<ApiResponse> deleteArticleById(@PathVariable Long articleId) {
-            Long deletedArticleId = articleService.deleteArticleById(articleId);
-            if (deletedArticleId != null) {
-                return ResponseEntity.ok(new ApiResponse("Successfully deleted!", deletedArticleId));
-            }else {
-                return ResponseEntity.badRequest().build();
-            }
+         articleService.deleteArticleById(articleId);
+        return ResponseEntity.ok(new ApiResponse("Successfully deleted!", true));
     }
 
     @GetMapping("/feed")
-    public ResponseEntity<List<ArticleResponseDto>> getAllArticles(@RequestParam int page) {
-        List<ArticleResponseDto> articles = articleService.getAllArticles(page);
+    public ResponseEntity<List<ArticleFeedDto>> getAllArticles(@RequestParam int page) {
+        List<ArticleFeedDto> articles = articleService.getAllArticles(page);
         if (articles != null && !articles.isEmpty()){
             return ResponseEntity.ok(articles);
         } else {

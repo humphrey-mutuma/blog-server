@@ -1,6 +1,8 @@
 package com.example.blog.service.article;
 
+import com.example.blog.dto.article.ArticleFeedDto;
 import com.example.blog.dto.article.ArticleResponseDto;
+import com.example.blog.dto.article.ArticleDto;
 import com.example.blog.dto.article.CreateArticleDto;
 import com.example.blog.model.Article;
 
@@ -14,9 +16,9 @@ public interface IArticleService {
     // Update an existing article
     ArticleResponseDto updateArticle(Article updatedArticle, Long articleId);
     // Delete an article by its ID
-    Long deleteArticleById(Long articleId);
+    void deleteArticleById(Long articleId);
     // Get all articles
-    List<ArticleResponseDto> getAllArticles(int page);
+    List<ArticleFeedDto> getAllArticles(int page);
 
     //  Get articles by Tags
     List<ArticleResponseDto> getArticlesByTag(String tag);

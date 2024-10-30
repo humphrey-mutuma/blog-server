@@ -1,6 +1,8 @@
 package com.example.blog.service.article;
 
+import com.example.blog.dto.article.ArticleFeedDto;
 import com.example.blog.dto.article.ArticleResponseDto;
+import com.example.blog.dto.article.ArticleDto;
 import com.example.blog.dto.article.CreateArticleDto;
 import com.example.blog.exceptions.ResourceNotFoundException;
 import com.example.blog.model.Article;
@@ -19,10 +21,10 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
+ import java.util.Set;
+ import java.util.stream.Collectors;
+
+import static com.example.blog.utils.Constants.PAGE_SIZE;
 
 @Service
 @RequiredArgsConstructor
@@ -43,8 +45,8 @@ public class ArticleService implements IArticleService {
     public ArticleResponseDto createArticle(CreateArticleDto newArticle) {
 //        get user
         User articleWrite = userRepository.findById(newArticle.getUserId()).map(user -> user).orElseThrow(() -> new ResourceNotFoundException("Write not found"));
-//        get tags
-        Set<Tag> tags = new HashSet<>(tagRepository.findAllById( newArticle.getTagIds()));
+ //        get tags
+        Set<Tag> tags = new HashSet<>(tagRepository.findAllById( newArticle.getTagsIds()));
         Article article = new Article();
         article.setUser(articleWrite);
         article.setTags(tags);
@@ -70,15 +72,15 @@ public class ArticleService implements IArticleService {
     }
 
     @Override
-    public Long deleteArticleById(Long articleId) {
-        return articleRepository.findById(articleId).map(article -> {
+    public void deleteArticleById(Long articleId) {
+          articleRepository.findById(articleId).map(article -> {
             articleRepository.deleteById(articleId);
             return articleId;
         }).orElseThrow(() -> new ResourceNotFoundException("Article not found"));
     }
 
     @Override
-    public List<ArticleResponseDto> getAllArticles(int page) {
+    public List<ArticleFeedDto> getAllArticles(int page) {
         // Set up pagination, with page size (e.g., 10 items per page)
         int pageSize = 10; // Adjust page size as needed
         Pageable pageable = PageRequest.of(page, pageSize);
@@ -89,7 +91,7 @@ public class ArticleService implements IArticleService {
             return articlesFeed
                     .getContent()
                     .stream()
-                    .map(article -> modelMapper.map(article,ArticleResponseDto.class))
+                    .map(article -> modelMapper.map(article,ArticleFeedDto.class))
                     .collect(Collectors.toList());
         }else {
             throw new ResourceNotFoundException("No Articles found");
@@ -99,7 +101,7 @@ public class ArticleService implements IArticleService {
     @Override
     public List<ArticleResponseDto> getArticlesByTag(String tag) {
         // Set up pagination, with page size (e.g., 10 items per page)
-//        int pageSize = 10; // Adjust page size as needed
+        int pageSize = PAGE_SIZE; // Adjust page size as needed
 //        Pageable pageable = PageRequest.of(page, pageSize);
 
         List<Article> articlesByTag = articleRepository.findByTagName(tag);
