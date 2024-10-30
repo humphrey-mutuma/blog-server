@@ -45,7 +45,7 @@ public class Article {
     @OneToMany(mappedBy = "article",cascade =  CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments;
 
-    @ManyToMany
+    @ManyToMany()
     @JoinTable(
             name = "article_tags",
             joinColumns = @JoinColumn(name = "article_id"),
