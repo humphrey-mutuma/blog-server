@@ -24,14 +24,14 @@ This is a Spring Boot backend server for managing articles in a blog application
 
 ### Prerequisites
 
-- Java 11 or higher
+- Java 17 or higher
 - Maven
-- IDE (e.g., IntelliJ IDEA, Vscode)
+- IDE (e.g., IntelliJ IDEA, Eclipse, Vscode)
 
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/articles-spring-boot.git
+git clone https://github.com/humphrey-mutuma/blog-server.git
 cd articles-spring-boot
 ```
 ![Swagger Documentation](src/main/resources/static/swagger.png)
