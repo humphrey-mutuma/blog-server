@@ -1,10 +1,10 @@
 package com.example.blog.service.user;
 
+import com.example.blog.model.User;
 import com.example.blog.dto.user.UserDto;
 import com.example.blog.exceptions.ResourceNotFoundException;
 import com.example.blog.model.Article;
-import com.example.blog.model.User;
-import com.example.blog.repository.UserRepository;
+ import com.example.blog.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -17,13 +17,6 @@ import java.util.Optional;
 public class UserService implements IUserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
-
-    @Override
-    public Optional<UserDto> getUserByEmail(String email) {
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found with email " + email));
-        return Optional.of(modelMapper.map(user, UserDto.class));
-    }
 
 
     @Override

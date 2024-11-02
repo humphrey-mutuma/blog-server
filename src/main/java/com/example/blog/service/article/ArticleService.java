@@ -1,14 +1,13 @@
 package com.example.blog.service.article;
 
+import com.example.blog.model.User;
 import com.example.blog.dto.article.ArticleFeedDto;
 import com.example.blog.dto.article.ArticleResponseDto;
-import com.example.blog.dto.article.ArticleDto;
 import com.example.blog.dto.article.CreateArticleDto;
 import com.example.blog.exceptions.ResourceNotFoundException;
 import com.example.blog.model.Article;
 import com.example.blog.model.Tag;
-import com.example.blog.model.User;
-import com.example.blog.repository.ArticleRepository;
+ import com.example.blog.repository.ArticleRepository;
 import com.example.blog.repository.TagRepository;
 import com.example.blog.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

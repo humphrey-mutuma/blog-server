@@ -1,16 +1,14 @@
 package com.example.blog.service.user;
 
+import com.example.blog.model.User;
 import com.example.blog.dto.user.UserDto;
 import com.example.blog.model.Article;
-import com.example.blog.model.User;
-
+ 
 import java.util.List;
 import java.util.Optional;
 
 public interface IUserService {
-//    get a user by email
-   Optional<UserDto> getUserByEmail(String email);
-//    update user details
+  //    update user details
     UserDto updateUser(User user, Long userId);
 //    delete user
     void   deleteUserById(Long userId);

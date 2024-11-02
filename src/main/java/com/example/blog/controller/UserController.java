@@ -1,10 +1,10 @@
 package com.example.blog.controller;
 
+import com.example.blog.model.User;
 import com.example.blog.dto.user.ArticlesCountDto;
 import com.example.blog.dto.user.UserDto;
 import com.example.blog.model.Article;
-import com.example.blog.model.User;
-import com.example.blog.response.ApiResponse;
+ import com.example.blog.response.ApiResponse;
 import com.example.blog.service.user.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,13 +20,6 @@ public class UserController {
     private final IUserService userService;
 
 
-    // Fetch user by email
-    @GetMapping("/email/{email}")
-    public ResponseEntity<UserDto> getUserByEmail(@PathVariable String email) {
-        Optional<UserDto> userOptional = userService.getUserByEmail(email);
-         return userOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-
-    }
 //    update a user
     @PostMapping("/{userId}")
     public ResponseEntity<UserDto> updateUser(@RequestBody User user, @PathVariable Long userId) {

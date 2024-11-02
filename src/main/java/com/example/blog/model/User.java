@@ -7,8 +7,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -25,9 +25,8 @@ public class User {
     @Column(unique = true, nullable = false)
     private String username;
 
-    @NotBlank(message = "Email is required!")
-    @Column(unique = true, nullable = false)
-    private String email;
+    @Column(nullable = true)
+    private String image;
 
     @NotBlank(message = "Password is required!")
     @Column(nullable = false)
@@ -41,11 +40,11 @@ public class User {
     private LocalDateTime updatedAt;
 
     @ElementCollection(fetch = FetchType.LAZY)
-    private List<Long> bookmarks;
+    private List<Long> bookmarks =  new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<Article> articles;
+    private List<Article> articles = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<Comment> comments;
+    private List<Comment> comments =  new ArrayList<>();
 }

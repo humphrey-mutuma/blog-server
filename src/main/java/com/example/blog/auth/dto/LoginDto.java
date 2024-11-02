@@ -1,4 +1,4 @@
-package com.example.blog.dto.user;
+package com.example.blog.auth.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -6,22 +6,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
+public class LoginDto {
     @NotNull
-    @NotBlank
-     private Long id;
-
-    @NotNull
-    @NotBlank
+    @NotBlank(message = "Username is required!")
     private String username;
 
     @NotNull
-    @NotBlank
-    private String image;
-
-
+    @NotBlank(message = "Password is required!")
+    private String password;
 }
