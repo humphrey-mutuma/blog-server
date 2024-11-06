@@ -1,11 +1,12 @@
-package com.example.blog.auth.repo;
+package com.example.blog.user;
 
 import com.example.blog.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AuthRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
-    User findByUsername(String username);
+//    user exits by email
+    boolean existsByUsername(String email);
 }

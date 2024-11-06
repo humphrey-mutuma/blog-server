@@ -1,7 +1,7 @@
 package com.example.blog.auth.service;
 
 import com.example.blog.auth.model.UserPrincipal;
-import com.example.blog.model.User;
+import com.example.blog.user.entity.User;
 import com.example.blog.auth.repo.AuthRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
